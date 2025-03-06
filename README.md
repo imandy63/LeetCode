@@ -1,2 +1,11 @@
-# LeetCode
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub v3](https://github.com/raphaelheinz/LeetHub-3.0)
+# LeetCode Submissions 🚀
+
+Welcome to my LeetCode solutions repository! This repository contains my solutions to various LeetCode problems.
+
+## 📜 Languages Used
+
+- Javascript/Typescript
+
+## 🔗 Profile
+
+- [LeetCode Profile](https://leetcode.com/u/HM531fd30y/)
