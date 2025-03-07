@@ -1,6 +1,6 @@
 function closestPrimes(left: number, right: number): number[] {
     
-    let sieve = Array(right).fill(1)
+    let sieve = Array(right+1).fill(1)
 
     let i = 2;
 
@@ -13,7 +13,7 @@ function closestPrimes(left: number, right: number): number[] {
 
     while(i<=Math.sqrt(right)){
         if(sieve[i]==1){
-            for(let k = i*2; k<right;k+=i){
+            for(let k = i*2; k<=right;k+=i){
                 sieve[k] = 0;
             }
         }
@@ -21,17 +21,25 @@ function closestPrimes(left: number, right: number): number[] {
         i++;
     }
 
-    for(let j = left;j<right;j++){
-        if(sieve[j]==1){
-            result.push(j);
-            count--;
-        }
+    let min = right
+    let current = 0
 
-        if(count==0){
-            return result;
+    for(let j = left; j<=right;j++){
+        if(sieve[j]==1){
+            if(current == 0){
+                current=j
+            } else if(j-current<min){
+                min = j-current
+                result = [current,j]
+            }
+            current=j
         }
     }
 
-    return [-1,-1]
+    if(min==right){
+        return [-1,-1]
+    } else {
+        return result
+    }
 
-};
+}
