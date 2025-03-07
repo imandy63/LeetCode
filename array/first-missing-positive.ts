@@ -19,7 +19,7 @@ function firstMissingPositive(nums: number[]): number {
     }
 
     for(i = 0;i<nums.length;i++){
-        if(nums[i]>nums.length || nums[i]==-1){
+        if(nums[i]>nums.length || nums[i]<=-1){
             return i+1;
         }
     }
