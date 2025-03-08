@@ -4,20 +4,20 @@ function minimumRecolors(blocks: string, k: number): number {
     let i = 0;
 
     for(i = 0;i<k;i++){
-        if(blocks[i]==="B"){
+        if(blocks[i]==="W"){
             cur++;
         }
     }
 
     min = cur;
     i=1;
-    while(i<blocks.length-i){
+    while(i<blocks.length-k){
 
         if(blocks[i]==="B" && blocks[i-1]==="W"){
             cur--;
         }
 
-        if(blocks[i+k]==="W"){
+        if(blocks[i+k-1]==="W"){
             cur++;
         }
 
