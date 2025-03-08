@@ -11,7 +11,7 @@ function minimumRecolors(blocks: string, k: number): number {
 
     min = cur;
     i=1;
-    while(i<blocks.length-k){
+    while(i<blocks.length-k+1){
         if(blocks[i-1]==="W"){
             cur--;
         }
@@ -24,7 +24,6 @@ function minimumRecolors(blocks: string, k: number): number {
         }
 
         if(cur<min){
-            console.log(min)
             min=cur
         }
 
