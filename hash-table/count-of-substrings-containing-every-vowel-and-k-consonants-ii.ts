@@ -26,6 +26,9 @@ function countOfSubstrings(word: string, k: number): number {
                     if(cur==1){
                         flag--;
                     }
+                    if(flag==5){
+                        result++;
+                    }
                 }
                 start++;
             }
