@@ -1,78 +1,39 @@
 function countOfSubstrings(word: string, k: number): number {
-    let map = new Map();
-    let consonantCount = 0;
+    let frequencies: number[][] = [new Array(128).fill(0), new Array(128).fill(0)];
+    "aeiou".split("").forEach(v => frequencies[0][v.charCodeAt(0)] = 1);
 
-    let flag = 0;
-    let result = 0;
+    let response = 0, currentK = 0, vowels = 0, extraLeft = 0, left = 0;
 
-    let start = 0;
-    let end = 0;
+    for (let right = 0; right < word.length; right++) {
+        let rightChar = word.charCodeAt(right);
 
-    while(end<=word.length-1){
-        if(isVowel(word[end])){
-            let count = map.get(word[end]);
-            map.set(word[end],count?count+1:1)
-            if(!count || count ==0) {
-                flag++;
-            }
+        if (frequencies[0][rightChar] === 1) {
+            if (++frequencies[1][rightChar] === 1) vowels++;
         } else {
-            consonantCount++;
-            while(consonantCount>k){
-                if(!isVowel(word[start])){
-                    consonantCount--;
-                } else {
-                    let cur = map.get(word[start]);
-                    map.set(word[start],cur-1)
-                    if(cur==1){
-                        flag--;
-                    }
-                    if(flag==5){
-                        result++;
-                    }
-                }
-                start++;
-            }
-        }
-        if(flag==5){
-            if(consonantCount==k){
-                    result++;
-            }
+            currentK++;
         }
 
-        end++;
-        while(end==word.length && isVowel(word[start]) && flag==5 && consonantCount==k){
-            if(!isVowel(word[start])){
-                consonantCount--;
+        while (currentK > k) {
+            let leftChar = word.charCodeAt(left);
+            if (frequencies[0][leftChar] === 1) {
+                if (--frequencies[1][leftChar] === 0) vowels--;
             } else {
-                let cur = map.get(word[start]);
-                if(cur==1){
-                    flag--;
-                }
-                map.set(word[start],cur-1)
+                currentK--;
             }
-            start++;
-            if(flag<5 || consonantCount<k){
-                break;
-            }
-            result++;
+            left++;
+            extraLeft = 0;
+        }
+
+        while (vowels === 5 && currentK === k && left < right && frequencies[0][word.charCodeAt(left)] === 1 && frequencies[1][word.charCodeAt(left)] > 1) {
+            extraLeft++;
+            frequencies[1][word.charCodeAt(left)]--;
+            left++;
+        }
+
+        if (currentK === k && vowels === 5) {
+            response += (1 + extraLeft);
         }
     }
-    return result
-}
 
-function isVowel(word: string){
-    switch(word){
-        case 'a':
-            return true;
-        case 'e':
-            return true;
-        case 'i':
-            return true;
-        case 'o':
-            return true;
-        case 'u':
-            return true;
-        default:
-            return false;
-    }
+    return response;
 }
