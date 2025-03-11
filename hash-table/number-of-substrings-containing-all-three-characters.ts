@@ -1,43 +1,20 @@
 function numberOfSubstrings(s: string): number {
-    let map = new Map()
-    let subMap;
-
+    let map = new Map<string, number>();
+    let start = 0;
     let result = 0;
 
-    let start = 0;
-    let end = 0;
+    for (let end = 0; end < s.length; end++) {
+        map.set(s[end], (map.get(s[end]) || 0) + 1);
 
-    while(end<s.length){
-        map.set(s[end],map.get(s[end])?map.get(s[end])+1:1);
-
-        if(map.size===3){
-            subMap = new Map(map)
-            let i = 0;
-            while(subMap.size==3 && i<end){
-                result++;
-                let count = subMap.get(s[start+i])
-
-                if(count==1){
-                    break;
-                }
-
-                subMap.set(s[start+i],count-1);
-                i++
-            }
-        }
-
-        while(map.size>3){
-            let count = map.get(s[start])
-            if(count==1){
-                map.delete(s[start])
-            } else {
-                map.set(s[start],count-1)
+        while (map.size === 3) { 
+            result += s.length - end;
+            map.set(s[start], map.get(s[start])! - 1);
+            if (map.get(s[start]) === 0) {
+                map.delete(s[start]);
             }
             start++;
         }
-
-        end++;
     }
 
     return result;
-};
+}
