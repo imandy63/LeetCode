@@ -10,7 +10,6 @@ function numberOfSubstrings(s: string): number {
         while(i+cur<s.length){
 
             map.set(s[i+cur],1);
-            console.log({i,cur,size:map.size})
             if(map.size>3){
                 break;
             }
