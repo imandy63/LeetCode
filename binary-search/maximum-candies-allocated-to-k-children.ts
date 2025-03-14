@@ -1,25 +1,31 @@
 function maximumCandies(candies: number[], k: number): number {
-    let n = candies.length;
-    let min = Math.min(...candies)
+    if (k === 0) { 
+        return 0;
+    }
     
-    candies.sort((a,b) => b-a)
-
-    if(n===k){
-        return min;
-    }
-
-    while(n<k){
-        let split = Math.floor(candies[(n-candies.length)%candies.length]/2)
-        if(split===0){
-            return 0;
+    let left: number = 1;
+    let right: number = Math.max(...candies);
+    let result: number = 0;
+    
+    while (left <= right) {
+        const mid: number = Math.floor((left + right) / 2);
+        if (canDistribute(candies, k, mid)) {
+            result = mid;
+            left = mid + 1;
         }
-        candies[(n-candies.length)%candies.length]-=split
-        if(split<min){
-            min=split
+        else {
+            right = mid - 1;
         }
-        n++;
     }
-
-    return min;
+    
+    return result; 
 
 };
+
+function canDistribute(candies: number[], k: number, x: number): boolean {
+        let count: number = 0;
+        for (let pile of candies) {
+            count += Math.floor(pile / x);
+        }
+        return count >= k;
+    }
