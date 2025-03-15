@@ -6,7 +6,7 @@ function minCapability(nums: number[], k: number): number {
     let result = 0;
 
     while(left<=right){
-        mid = Math.floor((right+mid)/2)
+        mid = Math.floor((right+left)/2)
         if(isSolvable(nums,k,mid)){
             result=mid
             right=mid-1
