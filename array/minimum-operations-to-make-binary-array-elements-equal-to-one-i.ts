@@ -4,12 +4,11 @@ function minOperations(nums: number[]): number {
     for(let i = 0; i<=length-3;i++){
         if(nums[i]===0){
             result++;
-            for(let j = i;j<i+3;j++){
-                nums[j] = 1 - nums[j]
-            }
+            nums[i] = 1 - nums[i]
+            nums[i+1] = 1 - nums[i+1]
+            nums[i+2] = 1 - nums[i+2]
         }
     }
-    console.log(nums)
     if(nums[length-2]!=0 && nums[length-1] !=0){
         return result;
     }
