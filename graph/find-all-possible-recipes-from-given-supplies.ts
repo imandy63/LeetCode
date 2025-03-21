@@ -6,6 +6,11 @@ function findAllRecipes(recipes: string[], ingredients: string[][], supplies: st
 
     while(i<recipes.length || !stop){
 
+        if(i===recipes.length && !stop){
+            i=0;
+            flag=0;
+        }
+
         if(result.includes(recipes[i])){
             i++;
             continue
@@ -18,6 +23,8 @@ function findAllRecipes(recipes: string[], ingredients: string[][], supplies: st
                 count++;
             }
         }
+
+        console.log({count,length:ingredients[i].length, rep:recipes[i],i,stop})
 
         if(count==ingredients[i].length){
             result.push(recipes[i])
@@ -39,11 +46,6 @@ function findAllRecipes(recipes: string[], ingredients: string[][], supplies: st
         }
 
         i++;
-
-        if(i===recipes.length && !stop){
-            i=0;
-            flag=0;
-        }
     }
     
     return result;
