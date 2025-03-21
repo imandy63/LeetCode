@@ -29,6 +29,8 @@ function findAllRecipes(recipes: string[], ingredients: string[][], supplies: st
         } else {
             if(flag==0){
                 stop = true;
+            } else {
+                stop = false;
             }
         }
 
@@ -40,9 +42,8 @@ function findAllRecipes(recipes: string[], ingredients: string[][], supplies: st
 
         if(i===recipes.length && !stop){
             i=0;
+            flag=0;
         }
-
-        flag=0;
     }
     
     return result;
