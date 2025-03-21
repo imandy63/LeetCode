@@ -4,7 +4,7 @@ function findAllRecipes(recipes: string[], ingredients: string[][], supplies: st
     let flag=0;
     let i = 0;
 
-    while(i<recipes.length && !stop){
+    while(i<recipes.length || !stop){
 
         if(result.includes(recipes[i])){
             i++;
