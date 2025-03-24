@@ -10,7 +10,7 @@ function countDays(days: number, meetings: number[][]): number {
 
     while(i<meetings.length){
         let current = mergedSchedules.length-1
-        if(mergedSchedules[current][1]>meetings[i][0]){
+        if(mergedSchedules[current][1]>=meetings[i][0]){
             if(mergedSchedules[current][1]<meetings[i][1]){
                 mergedSchedules[current][1]=meetings[i][1]
             }
